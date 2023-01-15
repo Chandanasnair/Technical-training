@@ -1,0 +1,11 @@
+#include <stdio.h>
+int main()
+{
+    float r,t,si;
+    int p;
+    printf("Enter the values of p,t,r");
+    scanf("%d%f%f",&p,&t,&r);
+    si=p*t*r/100;
+    printf("The simple intrest is=%f",si);
+    return 0;
+}
