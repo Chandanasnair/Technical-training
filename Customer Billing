@@ -1,0 +1,567 @@
+package CustomerBill;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.MatteBorder;
+import javax.swing.text.JTextComponent;
+
+import java.awt.Color;
+import java.awt.Component;
+
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import java.awt.Font;
+import javax.swing.JComboBox;
+import javax.swing.JCheckBox;
+import javax.swing.AbstractButton;
+import javax.swing.JButton;
+import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.awt.event.ActionEvent;
+
+public class CustomerBill extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
+	private JTextField textField_4;
+	private JTextField textField_5;
+	private JTextField textField_6;
+	private JTextField textField_10;
+	private JTextField textField_7;
+	private JTextField textField_8;
+	private JTextField textField_9;
+	private JTextField textField_11;
+	private JTextField textField_12;
+	private JTextField textField_13;
+	private JTextField textField_14;
+	private JTextField textField_15;
+	private JTextField textField_16;
+	private JTextField textField_17;
+	private JTextField textField_18;
+	private JTextField jTxtTotal;
+	private JTextField jTxtTax;
+	private JTextField jTxtSubTotal;
+	private JFrame frame;
+	private JTextArea jtxtReceipt;
+	String iTax,iSubTotal,iTotal;
+	double[]itemcost=new double[20];
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					CustomerBill frame = new CustomerBill();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public CustomerBill() {
+		addWindowListener(new WindowAdapter() {
+			public void windowActivated(WindowEvent arg0) {
+				textField.setText(null);
+				textField.setEnabled(false);
+				int refs=5015 + (int)(Math.random()*17238);
+				String cRef="";
+				cRef+=refs+1560;
+				textField.setText(cRef);
+			}
+		});
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 1400, 800);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(143, 188, 143));
+		panel.setBorder(new MatteBorder(14, 14, 14, 14, (Color) new Color(0, 128, 0)));
+		panel.setBounds(0, 0, 1383, 711);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setLayout(null);
+		panel_1.setBorder(new MatteBorder(14, 14, 14, 14, (Color) new Color(0, 128, 0)));
+		panel_1.setBackground(new Color(143, 188, 143));
+		panel_1.setBounds(20, 34, 311, 463);
+		panel.add(panel_1);
+		
+		JLabel lblNewLabel = new JLabel("Customer Ref");
+		lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		lblNewLabel.setBounds(24, 34, 100, 21);
+		panel_1.add(lblNewLabel);
+		
+		textField = new JTextField();
+		textField.setBounds(120, 35, 160, 20);
+		panel_1.add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblNewLabel_1 = new JLabel("Firstname");
+		lblNewLabel_1.setFont(new Font("Times New Roman", Font.BOLD, 16));
+		lblNewLabel_1.setBounds(24, 69, 80, 21);
+		panel_1.add(lblNewLabel_1);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(114, 70, 166, 21);
+		panel_1.add(textField_1);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("Surname");
+		lblNewLabel_1_1.setFont(new Font("Times New Roman", Font.BOLD, 16));
+		lblNewLabel_1_1.setBounds(24, 103, 66, 23);
+		panel_1.add(lblNewLabel_1_1);
+		
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		textField_2.setBounds(114, 104, 166, 20);
+		panel_1.add(textField_2);
+		
+		JLabel lblNewLabel_1_1_1 = new JLabel("Address");
+		lblNewLabel_1_1_1.setFont(new Font("Times New Roman", Font.BOLD, 16));
+		lblNewLabel_1_1_1.setBounds(24, 142, 66, 23);
+		panel_1.add(lblNewLabel_1_1_1);
+		
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		textField_3.setBounds(114, 135, 166, 37);
+		panel_1.add(textField_3);
+		
+		JLabel lblNewLabel_1_1_1_1 = new JLabel("Pin Code");
+		lblNewLabel_1_1_1_1.setFont(new Font("Times New Roman", Font.BOLD, 16));
+		lblNewLabel_1_1_1_1.setBounds(24, 181, 66, 23);
+		panel_1.add(lblNewLabel_1_1_1_1);
+		
+		textField_4 = new JTextField();
+		textField_4.setColumns(10);
+		textField_4.setBounds(114, 183, 166, 20);
+		panel_1.add(textField_4);
+		
+		JLabel lblNewLabel_1_1_1_1_1 = new JLabel("Mobile");
+		lblNewLabel_1_1_1_1_1.setFont(new Font("Times New Roman", Font.BOLD, 16));
+		lblNewLabel_1_1_1_1_1.setBounds(24, 217, 66, 23);
+		panel_1.add(lblNewLabel_1_1_1_1_1);
+		
+		textField_5 = new JTextField();
+		textField_5.setColumns(10);
+		textField_5.setBounds(114, 218, 166, 20);
+		panel_1.add(textField_5);
+		
+		JLabel lblNewLabel_1_1_1_1_1_1 = new JLabel("Email");
+		lblNewLabel_1_1_1_1_1_1.setFont(new Font("Times New Roman", Font.BOLD, 16));
+		lblNewLabel_1_1_1_1_1_1.setBounds(24, 253, 66, 23);
+		panel_1.add(lblNewLabel_1_1_1_1_1_1);
+		
+		textField_6 = new JTextField();
+		textField_6.setColumns(10);
+		textField_6.setBounds(114, 254, 166, 20);
+		panel_1.add(textField_6);
+		
+		JLabel lblNewLabel_1_1_1_1_1_1_1 = new JLabel("Nationality");
+		lblNewLabel_1_1_1_1_1_1_1.setFont(new Font("Times New Roman", Font.BOLD, 16));
+		lblNewLabel_1_1_1_1_1_1_1.setBounds(24, 287, 90, 23);
+		panel_1.add(lblNewLabel_1_1_1_1_1_1_1);
+		
+		JLabel lblNewLabel_1_1_1_1_1_1_1_1 = new JLabel("Type ID");
+		lblNewLabel_1_1_1_1_1_1_1_1.setFont(new Font("Times New Roman", Font.BOLD, 16));
+		lblNewLabel_1_1_1_1_1_1_1_1.setBounds(24, 321, 66, 23);
+		panel_1.add(lblNewLabel_1_1_1_1_1_1_1_1);
+		
+		JLabel lblNewLabel_1_1_1_1_1_1_1_1_1 = new JLabel("Gender");
+		lblNewLabel_1_1_1_1_1_1_1_1_1.setFont(new Font("Times New Roman", Font.BOLD, 16));
+		lblNewLabel_1_1_1_1_1_1_1_1_1.setBounds(24, 355, 66, 23);
+		panel_1.add(lblNewLabel_1_1_1_1_1_1_1_1_1);
+		
+		JLabel lblNewLabel_1_1_1_1_1_1_1_1_1_1 = new JLabel("Date of Birth");
+		lblNewLabel_1_1_1_1_1_1_1_1_1_1.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		lblNewLabel_1_1_1_1_1_1_1_1_1_1.setBounds(24, 389, 94, 21);
+		panel_1.add(lblNewLabel_1_1_1_1_1_1_1_1_1_1);
+		
+		textField_10 = new JTextField();
+		textField_10.setColumns(10);
+		textField_10.setBounds(114, 390, 166, 20);
+		panel_1.add(textField_10);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(114, 288, 166, 21);
+		panel_1.add(comboBox);
+		
+		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setBounds(114, 356, 166, 21);
+		panel_1.add(comboBox_1);
+		
+		JComboBox comboBox_2 = new JComboBox();
+		comboBox_2.setBounds(114, 322, 166, 22);
+		panel_1.add(comboBox_2);
+		
+		JPanel panel_1_1 = new JPanel();
+		panel_1_1.setLayout(null);
+		panel_1_1.setBorder(new MatteBorder(14, 14, 14, 14, (Color) new Color(0, 128, 0)));
+		panel_1_1.setBackground(new Color(143, 188, 143));
+		panel_1_1.setBounds(335, 36, 397, 481);
+		panel.add(panel_1_1);
+		
+		JCheckBox chckbxVanillacupcakes = new JCheckBox("Vanilla cupcakes");
+		chckbxVanillacupcakes.setBackground(new Color(143, 188, 143));
+		chckbxVanillacupcakes.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		chckbxVanillacupcakes.setBounds(20, 32, 137, 27);
+		panel_1_1.add(chckbxVanillacupcakes);
+		
+		textField_7 = new JTextField();
+		textField_7.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_7.setBounds(187, 32, 171, 27);
+		panel_1_1.add(textField_7);
+		textField_7.setColumns(10);
+		
+		JCheckBox chckbxCheesecake = new JCheckBox("Cheese cake");
+		chckbxCheesecake.setBackground(new Color(143, 188, 143));
+		chckbxCheesecake.setForeground(new Color(0, 0, 0));
+		chckbxCheesecake.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		chckbxCheesecake.setBounds(20, 68, 137, 27);
+		panel_1_1.add(chckbxCheesecake);
+		
+		textField_8 = new JTextField();
+		textField_8.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_8.setColumns(10);
+		textField_8.setBounds(187, 69, 171, 27);
+		panel_1_1.add(textField_8);
+		
+		JCheckBox chckbxblackForest = new JCheckBox("Black Forest");
+		chckbxblackForest.setBackground(new Color(143, 188, 143));
+		chckbxblackForest.setForeground(new Color(0, 0, 0));
+		chckbxblackForest.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		chckbxblackForest.setBounds(20, 147, 137, 27);
+		panel_1_1.add(chckbxblackForest);
+		
+		JCheckBox chckbxDreamcake = new JCheckBox("Dream cake");
+		chckbxDreamcake.setBackground(new Color(143, 188, 143));
+		chckbxDreamcake.setForeground(new Color(0, 0, 0));
+		chckbxDreamcake.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		chckbxDreamcake.setBounds(20, 108, 137, 27);
+		panel_1_1.add(chckbxDreamcake);
+		
+		textField_9 = new JTextField();
+		textField_9.setColumns(10);
+		textField_9.setBounds(187, 108, 171, 27);
+		panel_1_1.add(textField_9);
+		
+		textField_11 = new JTextField();
+		textField_11.setColumns(10);
+		textField_11.setBounds(187, 147, 171, 27);
+		panel_1_1.add(textField_11);
+		
+		JCheckBox chckbxChocolatecake = new JCheckBox("Chocolate cake");
+		chckbxChocolatecake.setBackground(new Color(143, 188, 143));
+		chckbxChocolatecake.setForeground(new Color(0, 0, 0));
+		chckbxChocolatecake.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		chckbxChocolatecake.setBounds(20, 220, 137, 27);
+		panel_1_1.add(chckbxChocolatecake);
+		
+		JCheckBox chckbxRedVelvet = new JCheckBox("Red Velvet");
+		chckbxRedVelvet.setBackground(new Color(143, 188, 143));
+		chckbxRedVelvet.setForeground(new Color(0, 0, 0));
+		chckbxRedVelvet.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		chckbxRedVelvet.setBounds(20, 181, 137, 27);
+		panel_1_1.add(chckbxRedVelvet);
+		
+		textField_12 = new JTextField();
+		textField_12.setColumns(10);
+		textField_12.setBounds(187, 181, 171, 27);
+		panel_1_1.add(textField_12);
+		
+		textField_13 = new JTextField();
+		textField_13.setColumns(10);
+		textField_13.setBounds(187, 220, 171, 27);
+		panel_1_1.add(textField_13);
+		
+		JCheckBox chckbxWhiteForestcake = new JCheckBox("White Forest cake");
+		chckbxWhiteForestcake.setBackground(new Color(143, 188, 143));
+		chckbxWhiteForestcake.setForeground(new Color(0, 0, 0));
+		chckbxWhiteForestcake.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		chckbxWhiteForestcake.setBounds(20, 297, 137, 27);
+		panel_1_1.add(chckbxWhiteForestcake);
+		
+		JCheckBox chckbxCoffeecake = new JCheckBox("Coffee cake");
+		chckbxCoffeecake.setBackground(new Color(143, 188, 143));
+		chckbxCoffeecake.setForeground(new Color(0, 0, 0));
+		chckbxCoffeecake.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		chckbxCoffeecake.setBounds(20, 258, 137, 27);
+		panel_1_1.add(chckbxCoffeecake);
+		
+		textField_14 = new JTextField();
+		textField_14.setColumns(10);
+		textField_14.setBounds(187, 258, 171, 27);
+		panel_1_1.add(textField_14);
+		
+		textField_15 = new JTextField();
+		textField_15.setColumns(10);
+		textField_15.setBounds(187, 297, 171, 27);
+		panel_1_1.add(textField_15);
+		
+		JPanel panel_1_3 = new JPanel();
+		panel_1_3.setForeground(new Color(143, 188, 143));
+		panel_1_3.setBounds(33, 345, 325, 113);
+		panel_1_1.add(panel_1_3);
+		panel_1_3.setBorder(new MatteBorder(14, 14, 14, 14, (Color) new Color(0, 128, 0)));
+		panel_1_3.setBackground(new Color(0, 128, 0));
+		panel_1_3.setLayout(null);
+		
+		JLabel lblNewLabel_2 = new JLabel("Tax");
+		lblNewLabel_2.setFont(new Font("Times New Roman", Font.BOLD, 16));
+		lblNewLabel_2.setBounds(10, 11, 69, 20);
+		panel_1_3.add(lblNewLabel_2);
+		
+		textField_16 = new JTextField();
+		textField_16.setBounds(98, 11, 167, 20);
+		panel_1_3.add(textField_16);
+		textField_16.setColumns(10);
+		
+		JLabel lblNewLabel_2_1 = new JLabel("Sub Total");
+		lblNewLabel_2_1.setFont(new Font("Times New Roman", Font.BOLD, 16));
+		lblNewLabel_2_1.setBounds(10, 42, 69, 20);
+		panel_1_3.add(lblNewLabel_2_1);
+		
+		textField_17 = new JTextField();
+		textField_17.setColumns(10);
+		textField_17.setBounds(98, 42, 167, 20);
+		panel_1_3.add(textField_17);
+		
+		JLabel lblNewLabel_2_2 = new JLabel("Total");
+		lblNewLabel_2_2.setFont(new Font("Times New Roman", Font.BOLD, 16));
+		lblNewLabel_2_2.setBounds(10, 73, 69, 20);
+		panel_1_3.add(lblNewLabel_2_2);
+		
+		textField_18 = new JTextField();
+		textField_18.setColumns(10);
+		textField_18.setBounds(98, 73, 167, 20);
+		panel_1_3.add(textField_18);
+		
+		JPanel panel_1_2 = new JPanel();
+		panel_1_2.setLayout(null);
+		panel_1_2.setBorder(new MatteBorder(14, 14, 14, 14, (Color) new Color(0, 128, 0)));
+		panel_1_2.setBackground(new Color(255, 255, 255));
+		panel_1_2.setBounds(742, 34, 320, 424);
+		panel.add(panel_1_2);
+		
+		JPanel panel_1_3_1 = new JPanel();
+		panel_1_3_1.setLayout(null);
+		panel_1_3_1.setBorder(new MatteBorder(14, 14, 14, 14, (Color) new Color(0, 128, 0)));
+		panel_1_3_1.setBackground(new Color(143, 188, 143));
+		panel_1_3_1.setBounds(30, 508, 301, 92);
+		panel.add(panel_1_3_1);
+		
+		JButton btnNewButton = new JButton("Print");
+		btnNewButton.addActionListener(new ActionListener() {
+			
+
+			public void actionPerformed(ActionEvent e) {
+				
+				try {
+					jtxtReceipt.print();
+				}
+				catch(java.awt.print.PrinterException e1) {
+					System.err.format("No Printer Found", e1.getMessage());
+					
+				}
+				
+			}
+		});
+		btnNewButton.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+		btnNewButton.setBounds(24, 27, 111, 33);
+		panel_1_3_1.add(btnNewButton);
+		
+		JButton btnTotal = new JButton("Total");
+		btnTotal.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				itemcost[0]=Double.parseDouble(textField_11.getText())*50;
+				itemcost[1]=Double.parseDouble(textField_12.getText())*87;
+				itemcost[2]=Double.parseDouble(textField_13.getText())*95;
+				itemcost[3]=Double.parseDouble(textField_14.getText())*210;
+				itemcost[4]=Double.parseDouble(textField_15.getText())*250;
+				itemcost[5]=Double.parseDouble(textField_16.getText())*300;
+				itemcost[6]=Double.parseDouble(textField_17.getText())*310;
+				itemcost[7]=Double.parseDouble(textField_18.getText())*350;
+				
+				itemcost[8]=itemcost[0]+itemcost[1]+itemcost[2]+itemcost[3]+itemcost[4];
+				itemcost[9]=itemcost[5]+itemcost[6]+itemcost[7];
+				
+				itemcost[10]= itemcost[8]+itemcost[9];
+				iTax=String.format("Rs %.2f", itemcost[10]/100);
+				iSubTotal=String.format("Rs %.2f", itemcost[10]);
+				iTotal=String.format("Rs %.2f", itemcost[10]+(itemcost[10]/100));
+				
+				jTxtTax.setText(iTax);
+				jTxtSubTotal.setText(iSubTotal);
+				jTxtTotal.setText(iTotal);
+				
+				//*************************************************************************
+				  jtxtReceipt.setEnabled(true);
+				//*************************************************************************
+				  int refs=1325 +(int)(Math.random()*4238);
+				  
+				//*************************************************************************
+				  Calendar timer=Calendar.getInstance();
+				  timer.getTime();
+				  SimpleDateFormat tTime=new SimpleDateFormat("HH:mm:ss");
+				  tTime.format(timer.getTime());
+				  SimpleDateFormat tDate=new SimpleDateFormat("dd-MMM-yyyy");
+				  tDate.format(timer.getTime());
+				//*************************************************************************
+					 jtxtReceipt.append("\t Customer Billing System\n"+"Reference:\t\t\t "+refs+"\n*************************************************************\t"
+					  		+"\n*********************************************************\t"+
+							  "\n Customer Ref:\t\t\t"+textField.getText()+
+							  "\n Firstname:\t\t\t"+textField_1.getText()+
+							  "\n Surname:\t\t\t"+textField_2.getText()+
+							  "\n Vanilla cupcake:\t\t\t"+textField_11.getText()+
+							  "\n Cheese cake:\t\t\t"+textField_12.getText()+
+							  "\n Dream cake:\t\t\t"+textField_13.getText()+
+							  "\n BlackForest:\t\t\t"+textField_14.getText()+
+							  "\n Chocolate cake:\t\t\t"+textField_15.getText()+
+							  "\n Red Velvet:\t\t\t"+textField_16.getText()+
+							  "\n Coffee cake:\t\t\t"+textField_17.getText()+
+							  "\n White Forest:\t\t\t"+textField_18.getText()+
+					          "\n********************************************************\t"+
+							  "\nTax:\t\t\t"+iTax+
+							  "\n Sub Total:\t\t\t"+iSubTotal+
+							  "\n Total:\t\t\t"+iTotal+
+							  "\n********************************************************\t"+
+							  "\nDate:"+tDate.format(timer.getTime())+
+							         "\t\tTime: "+tTime.format(timer.getTime()) +
+							  "\n\n\t Thank you for Shopping at eShop\n");
+				
+				
+				
+			}
+		});
+		btnTotal.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+		btnTotal.setBounds(156, 27, 111, 33);
+		panel_1_3_1.add(btnTotal);
+		
+		JPanel panel_1_3_1_1 = new JPanel();
+		panel_1_3_1_1.setLayout(null);
+		panel_1_3_1_1.setBorder(new MatteBorder(14, 14, 14, 14, (Color) new Color(0, 128, 0)));
+		panel_1_3_1_1.setBackground(new Color(143, 188, 143));
+		panel_1_3_1_1.setBounds(769, 492, 320, 97);
+		panel.add(panel_1_3_1_1);
+		
+		JButton btnNewButton_2 = new JButton("Reset");
+		btnNewButton_2.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				
+				textField_1.setText("");
+				textField_2.setText("");
+				textField.setText("");
+				textField_3.setText("");
+				textField_4.setText("");
+				textField_5.setText("");
+				textField_6.setText("");
+				textField_7.setText("");
+				textField_8.setText("");
+				textField_9.setText("");
+				textField_10.setText("");
+				textField_11.setEnabled(false);
+				textField_12.setEnabled(false);
+				textField_13.setEnabled(false);
+				textField_14.setEnabled(false);
+				textField_15.setEnabled(false);
+				textField_16.setEnabled(false);
+				textField_17.setEnabled(false);
+				textField_18.setEnabled(false);
+				
+				chckbxVanillacupcakes.setSelected(false);
+				 chckbxCheesecake.setSelected(false);
+				chckbxDreamcake.setSelected(false);
+				chckbxblackForest.setSelected(false);
+				chckbxChocolatecake.setSelected(false);
+				chckbxRedVelvet.setSelected(false);
+				chckbxCoffeecake.setSelected(false);
+				chckbxWhiteForestcake.setSelected(false);
+				
+				
+				textField.setText(null);
+				textField.setEnabled(false);
+				int refs=5015 + (int)(Math.random()*17238);
+				String cRef="";
+				cRef+=refs+1560;
+				
+				textField.setText(cRef);
+				textField_1.setText("");
+				textField_2.setText("");
+				textField_3.setText("");
+				textField_4.setText("");
+				textField_5.setText("");
+				textField_6.setText("");
+				textField_7.setText("");
+				jTxtTotal.setText(null);
+				jTxtTax.setText(null);
+				jTxtSubTotal.setText(null);
+				
+				textField_8(comboBox).setSelectedIndex(0);
+				textField_9(comboBox).setSelectedIndex(0);
+				textField_10(comboBox).setSelectedIndex(0);
+				
+				
+				
+				
+				
+			}
+
+			private JComboBox textField_10(JComboBox comboBox) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			private JComboBox textField_9(JComboBox comboBox) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			private JComboBox textField_8(JComboBox comboBox) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+		});
+		btnNewButton_2.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+		btnNewButton_2.setBounds(34, 34, 110, 39);
+		panel_1_3_1_1.add(btnNewButton_2);
+		
+		JButton btnNewButton_2_1 = new JButton("Exit");
+		btnNewButton_2_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame=new JFrame();
+				if(JOptionPane.showConfirmDialog(frame,"Confirm if you want to exit","Customer Bill",JOptionPane.YES_NO_CANCEL_OPTION)==JOptionPane.YES_NO_CANCEL_OPTION)
+						
+			     System.exit(0);
+		}
+
+		});
+		btnNewButton_2_1.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+		btnNewButton_2_1.setBounds(172, 34, 110, 39);
+		panel_1_3_1_1.add(btnNewButton_2_1);
+	}
+}
